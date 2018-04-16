@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Box Game</title>
+  <style type="text/css">
+    canvas {
+      border: solid 1px #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="500"></canvas>
+  <script type="text/javascript">
+
+    //Create the Canvas
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+
+    var box = {
+      x: 150,
+      y: 150,
+      speed: 0.01,
+      size: 40,
+      color: "blue"
+    }
+
+    var ellipse = {
+      movement: 0.01,
+      width: 600,
+      height: 200
+    }
+
+    function moveBox(){
+      console.log(ellipse.movement);
+      ellipse.movement += box.speed;
+      box.x = centerX + Math.cos(ellipse.movement)*(ellipse.width/2);
+      box.y = centerY + Math.sin(ellipse.movement)*(ellipse.height/2);
+    }
+
+    function drawBox(){
+      console.log("drawBox");
+      context.clearRect(0,0,canvas.width,canvas.height);
+      moveBox();
+      context.fillStyle = box.color;
+      context.fillRect(box.x, box.y, box.size, box.size);
+      requestAnimationFrame(drawBox);
+    }
+
+    drawBox();
+
+  </script>
+</body>
+</html>
